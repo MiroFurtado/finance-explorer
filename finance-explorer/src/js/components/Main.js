@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import App from 'grommet/components/App';
-import Split from 'grommet/components/Split';
 
 import NavSidebar from './NavSidebar';
 import { navResponsive } from '../actions/nav';

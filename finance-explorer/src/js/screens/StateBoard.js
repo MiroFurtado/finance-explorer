@@ -12,9 +12,10 @@ import Notification from 'grommet/components/Notification';
 import Value from 'grommet/components/Value';
 import Spinning from 'grommet/components/icons/Spinning';
 import LinkPrevious from 'grommet/components/icons/base/LinkPrevious';
-import Layer from 'grommet/components/Layer';
+import PartyBoard from './PartyBoard';
 
-import Columns from 'grommet/components/Columns';
+
+
 
 
 import SVGIcon from 'grommet/components/SVGIcon';
@@ -31,6 +32,23 @@ import {
 } from '../actions/states';
 
 import { pageLoaded } from './utils';
+
+const iframe = '<iframe frameBorder="0" src="../../piv.html" width="900" height="450"></iframe>'; 
+const IframeComp = React.createClass({
+  iframe: function () {
+    return {
+      __html: this.props.iframe
+    }
+  },
+
+  render: function() {
+    return (
+      <div>
+        <div dangerouslySetInnerHTML={ this.iframe() } />
+      </div>
+    );
+  }
+});
 
 //SVG for the Democratic Icon
 const DemIcon = () => (
@@ -69,22 +87,22 @@ const RepIcon = () => (
 );
 
 //Hacky way to include 
-const iframe = '<iframe frameBorder="0" src="../../piv.html" width="900" height="450"></iframe>'; 
-const IframeComp = React.createClass({
-  iframe: function () {
-    return {
-      __html: this.props.iframe
-    }
-  },
+// const iframe = '<iframe frameBorder="0" src="../../piv.html" width="900" height="450"></iframe>'; 
+// const IframeComp = React.createClass({
+//   iframe: function () {
+//     return {
+//       __html: this.props.iframe
+//     }
+//   },
 
-  render: function() {
-    return (
-      <div>
-        <div dangerouslySetInnerHTML={ this.iframe() } />
-      </div>
-    );
-  }
-});
+//   render: function() {
+//     return (
+//       <div>
+//         <div dangerouslySetInnerHTML={ this.iframe() } />
+//       </div>
+//     );
+//   }
+// });
 
 
 class StateBoard extends Component {
@@ -123,9 +141,8 @@ class StateBoard extends Component {
     const { error, task } = this.props;
 
 
-    const layer = (this.state.demActive)
-      ?         <Box pad="large" align="center">
-      <IframeComp iframe={iframe} /></Box>
+    const layer = (this.state.demActive || this.state.repActive)
+      ?        <div><PartyBoard dem={this.state.demActive} rep={this.state.repActive}/></div>
       : <Box pad="small" align="center">
               <Heading margin='none' strong={true}>
           Pick your party
