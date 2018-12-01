@@ -34,8 +34,8 @@ class Splash extends Component {
     this.setState({
       value: event.target.value
     })
-    if(this.state.value=="Texas" || this.state.value=="texas") {
-      window.location.replace("/states/texas/");
+    if(this.state.value.toLowerCase()=="texas") {
+      window.location.replace("/states/tx/");
     }
   }
 
@@ -77,7 +77,6 @@ class Splash extends Component {
           <Animate enter={{"animation": "fade", "duration": 2000, "delay": 100}}>
           <Paragraph size='xlarge'>
           Campaign Finance Analysis
- 
           </Paragraph>
           </Animate>
         </Header>     

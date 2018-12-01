@@ -44,8 +44,7 @@ class Main extends Component {
               <Route path='/splash' component={Splash} />
               <Route path='/dashboard' component={Dashboard} />
               <Route path='/login' component={Login} />
-              <Route path='/tasks/:id' component={Task} />
-              <Route path='/states/:id' component={StateBoard} />
+              <Route path='/states/:name' component={StateBoard} />
               <Route path='/tasks' component={Tasks} />
               <Route path='/*' component={NotFound} />
             </Switch>
