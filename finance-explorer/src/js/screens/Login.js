@@ -33,7 +33,11 @@ class Login extends Component {
   _onSubmit(fields) {
     const { dispatch } = this.props;
     const { router } = this.context;
-    dispatch(login(fields.username, fields.password, () => (
+
+    window.localStorage.email = fields.email;
+    window.localStorage.name = fields.email;
+    window.localStorage.token = 'no-token';
+    dispatch(login(() => (
       router.history.push('/splash')
     )));
   }
