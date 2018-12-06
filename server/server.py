@@ -47,3 +47,10 @@ def get__sector_bar(state):
 @app.route('/api/<state>/cands/')
 def get_candidates(state):
     return jsonify(candidates=bb.get_candidates(state))
+
+@app.route("/")
+def index():
+    return "Working configuration! The interesting stuff is hidden behind /api/"
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port='8080')
