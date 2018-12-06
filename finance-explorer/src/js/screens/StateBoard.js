@@ -55,7 +55,10 @@ class StateBoard extends Component {
   componentDidMount() {
     const { match: { params }, dispatch } = this.props;
 
+
     this.setState({name: params.name.toUpperCase()})
+
+    pageLoaded(this.state.name+' Selection');
 
     fetch("http://127.0.0.1:5000/api/"+params.name.toUpperCase()+"/cands/")
     .then((response) => response.json())
@@ -187,8 +190,4 @@ StateBoard.propTypes = {
   match: PropTypes.object.isRequired,
   task: PropTypes.object
 };
-export default StateBoard;
-
-// const select = state => ({ ...state.tasks });
-
-// export default connect(select)(StateBoard);
+export default connect()(StateBoard);

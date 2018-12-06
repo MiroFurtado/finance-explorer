@@ -16,7 +16,7 @@ import { pageLoaded } from './utils';
 import { login } from '../actions/session';
 
 
-const suggestions = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+const suggestions = { 'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR', 'california': 'CA', 'colorado': 'CO', 'connecticut': 'CT', 'delaware': 'DE', 'florida': 'FL', 'georgia': 'GA', 'hawaii': 'HI', 'idaho': 'ID', 'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA', 'kansas': 'KS', 'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME', 'maryland': 'MD', 'massachusetts': 'MA', 'michigan': 'MI', 'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO', 'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV', 'new hampshire': 'NH', 'new jersey': 'NJ', 'new mexico': 'NM', 'new york': 'NY', 'north carolina': 'NC', 'north dakota': 'ND', 'ohio': 'OH', 'oklahoma': 'OK', 'oregon': 'OR', 'pennsylvania': 'PA', 'rhode island': 'RI', 'south carolina': 'SC', 'south dakota': 'SD', 'tennessee': 'TN', 'texas': 'TX', 'utah': 'UT', 'vermont': 'VT', 'virginia': 'VA', 'washington': 'WA', 'west virginia': 'WV', 'wisconsin': 'WI', 'wyoming': 'WY', }
 
 class Splash extends Component {
   constructor () {
@@ -32,10 +32,10 @@ class Splash extends Component {
 
   handleFormChange(event) {
     this.setState({
-      value: event.target.value
+      value: event.target.value,
     })
-    if(this.state.value.toLowerCase()=="texas") {
-      window.location.replace("/states/tx/");
+    if(this.state.value.toLowerCase() in suggestions) {
+      window.location.replace("/states/"+suggestions[this.state.value.toLowerCase()]+"/");
     }
   }
 
@@ -83,6 +83,7 @@ class Splash extends Component {
         {errorNode}
         <SearchInput
           value={this.state.value}
+          suggestions={this.state.suggestions}
           onDOMChange={this.handleFormChange}
           placeholder="State"
         />
@@ -91,7 +92,7 @@ class Splash extends Component {
           </Heading>
           <Animate enter={{"animation": "fade", "duration": 1000, "delay": 0}}>
           <Paragraph size='large'>
-            Analyze all your data here. Tktk lorem ipsum. Generate insights. More buzzwords. Analyzing campaign finance with blockchain, deep learning, generative approaches.
+          Campaign finance data is <b>messy</b>, <b>complicated</b>, and <b>difficult to interpret.</b> This tool is designed to abstract away from itemized lists of contributions so that you can visualize emergent trends in campaign finance state-by-state.
           </Paragraph>
           </Animate>
         </Box>
@@ -116,6 +117,5 @@ Splash.contextTypes = {
   intl: PropTypes.object
 };
 
-const select = state => ({ ...state.splash });
 
-export default connect(select)(Splash);
+export default connect()(Splash);

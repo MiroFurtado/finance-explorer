@@ -38,7 +38,7 @@ class Login extends Component {
     window.localStorage.name = fields.email;
     window.localStorage.token = 'no-token';
     dispatch(login(() => (
-      router.history.push('/splash')
+      router.history.push('/')
     )));
   }
 
