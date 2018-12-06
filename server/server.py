@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 import bluebonnet as bb
 
 #Load in the data
-states=bb.load('data/all_states_final.pickle')
+states=bb.load('data/all_states_prot2')
 
 
 app = Flask(__name__)
