@@ -7,7 +7,7 @@ const localStorage = window.localStorage;
 export function initialize() {
   return (dispatch) => {
     const { email, name, token } = localStorage;
-    if (email && token) {
+    if (true) {
       dispatch({
         type: SESSION_LOAD, payload: { email, name, token }
       });
@@ -19,29 +19,7 @@ export function initialize() {
 
 export function login(email, password, done) {
   return dispatch => (
-    postSession(email, password)
-      .then((payload) => {
-        updateHeaders({ Auth: payload.token });
-        dispatch({ type: SESSION_LOGIN, payload });
-        try {
-          localStorage.email = payload.email;
-          localStorage.name = payload.name;
-          localStorage.token = payload.token;
-        } catch (e) {
-          alert(
-            'Unable to preserve session, probably due to being in private ' +
-            'browsing mode.'
-          );
-        }
-        done();
-      })
-      .catch(payload => dispatch({
-        type: SESSION_LOGIN,
-        error: true,
-        payload: {
-          statusCode: payload.status, message: payload.statusText
-        }
-      }))
+      done()
   );
 }
 
