@@ -29,11 +29,6 @@ class GraphDisplay extends Component {
     return {__html: '<iframe frameBorder="0" src="http://127.0.0.1:8080/api/'+state+'/r/'+page+'" width="900" height="500"></iframe>'}
   }
 
-  iframe_save(state, page,dem) {
-    if(dem) return {__html: '<iframe frameBorder="0" src="http://127.0.0.1:8080/api/save/'+state+'/d/'+page+'" width="0" height="0"></iframe>'}
-    return {__html: '<iframe frameBorder="0" src="http://127.0.0.1:8080/api/save/'+state+'/r/'+page+'" width="0" height="0"></iframe>'}
-  }
-
   _onSubmit(fields) {
     fields.preventDefault();
 
@@ -82,7 +77,7 @@ class GraphDisplay extends Component {
             align='right'
             pad='none'>
             <Form id="report_form" onSubmit={this._onSubmit}>
-            <textarea name="note" placeholder="Add your (markdown enabled) insights here!" rows="3" cols="45"/>
+            <textarea name="note" placeholder="Add your (markdown enabled) insights here!" rows="3" cols="40"/>
             </Form>
           </Box>
       </Split>

@@ -42,10 +42,10 @@ class PartyBoard extends Component {
             <Box
     justify='center'
     align='center'
-    pad='medium' margin={{'left': 'large'}}>
+    pad='small' margin={{'left': 'medium'}}>
     <GraphDisplay graph={this.state.currentGraph} state={this.props.state} dem={this.state.demActive}/> </Box>
     <Box align='right'>
-    <Sidebar>
+    <Sidebar size={'large'}>
     <Tiles fill={true}
   selectable={true}>
   <Tile separator='top'

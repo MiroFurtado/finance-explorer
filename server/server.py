@@ -34,13 +34,11 @@ def save_graph(state,party,graph,session="dev-session"):
 @app.route('/api/show',methods=['POST', 'GET'])
 def display_saved(session="dev-session"):
     to_ret = "<link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,900' rel='stylesheet' type='text/css'><link rel='stylesheet' type='text/css' href="+url_for('static', filename='report.css')+">"
-    # if request.method == 'POST':
-    #     to_ret += markdown2.markdown(request.form['note'])
     if session not in saved_plots:
-        return "<h1>You haven't saved any graphs!</h1>"
+        return "<p>You haven't saved any graphs!</p>"
     for graph,note in saved_plots[session]:
-        to_ret += graph
         to_ret += note
+        to_ret += graph
     return to_ret
 
 @app.route('/api/clear')
@@ -53,12 +51,16 @@ def clear_saved(session="dev-session"):
 @app.route('/api/<state>/<party>/')
 def get_report(state,party):
     state,party=state.lower(),party.lower()
+    if not state.upper() in states_dem:
+        return "<h1>Invalid access!</h1>"
     states = states_dem if (party.upper()=="D") else states_rep
     return states[state.upper()].gen_report(states=states)
 
 @app.route('/api/<state>/<party>/stack')
 def get_stack(state,party):
     state,party=state.lower(),party.lower()
+    if not state.upper() in states_dem:
+        return "<h1>Invalid access!</h1>"
     if(not (("stack"+state+party) in plot_cache)):
         print("Cache miss on stack for %s %s"%(state,party))
         states = states_dem if (party.upper()=="D") else states_rep
@@ -68,6 +70,8 @@ def get_stack(state,party):
 @app.route('/api/<state>/<party>/coh')
 def get_coh(state,party):
     state,party=state.lower(),party.lower()
+    if not state.upper() in states_dem:
+        return "<h1>Invalid access!</h1>"
     if(not (("coh"+state+party) in plot_cache)):
         print("Cache miss on coh for %s %s"%(state,party))
         states = states_dem if (party.upper()=="D") else states_rep
@@ -77,6 +81,8 @@ def get_coh(state,party):
 @app.route('/api/<state>/<party>/pvi-scatter')
 def get_scatter(state,party):
     state,party=state.lower(),party.lower()
+    if not state.upper() in states_dem:
+        return "<h1>Invalid access!</h1>"
     if(not (("pvi-scatter"+state+party) in plot_cache)):
         print("Cache miss on pvi for %s %s"%(state,party))
         states = states_dem if (party.upper()=="D") else states_rep
@@ -86,6 +92,8 @@ def get_scatter(state,party):
 @app.route('/api/<state>/<party>/pvi-performance')
 def get_performance(state,party):
     state,party=state.lower(),party.lower()
+    if not state.upper() in states_dem:
+        return "<h1>Invalid access!</h1>"
     if(not (("pvi-performance"+state+party) in plot_cache)):
         print("Cache miss on perf graph for %s %s"%(state,party))
         states = states_dem if (party.upper()=="D") else states_rep
@@ -95,6 +103,8 @@ def get_performance(state,party):
 @app.route('/api/<state>/<party>/incumbent-pie')
 def get_incumbent_pie(state,party):
     state,party=state.lower(),party.lower()
+    if not state.upper() in states_dem:
+        return "<h1>Invalid access!</h1>"
     if(not (("incumbent-pie"+state+party) in plot_cache)):
         print("Cache miss on inc pie graph for %s %s"%(state,party))
         states = states_dem
@@ -105,6 +115,8 @@ def get_incumbent_pie(state,party):
 @app.route('/api/<state>/<party>/incumbent-scatter')
 def get_incumbent_scatter(state,party):
     state,party=state.lower(),party.lower()
+    if not state.upper() in states_dem:
+        return "<h1>Invalid access!</h1>"
     if(not (("incumbent-scatter"+state+party) in plot_cache)):
         print("Cache miss on inc scatter graph for %s %s"%(state,party))
         states = states_dem
@@ -113,6 +125,8 @@ def get_incumbent_scatter(state,party):
 
 @app.route('/api/<state>/<party>/sector/full')
 def get__full_sector_bar(state,party):
+    if not state.upper() in states_dem:
+        return "<h1>Invalid access!</h1>"
     state,party=state.lower(),party.lower()
     states = states_dem# if (party.upper()=="D") else states_rep
     return states[state.upper()].gen_sector_viz()
@@ -120,6 +134,8 @@ def get__full_sector_bar(state,party):
 @app.route('/api/<state>/<party>/sector/')
 def get__sector_bar(state,party):
     state,party=state.lower(),party.lower()
+    if not state.upper() in states_dem:
+        return "<h1>Invalid access!</h1>"
     if(not (("sector"+state+party) in plot_cache)):
         print("Cache miss on sector graph for %s %s"%(state,party))
         states = states_dem

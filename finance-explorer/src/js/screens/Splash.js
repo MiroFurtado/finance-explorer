@@ -8,7 +8,7 @@ import Header from 'grommet/components/Header';
 import Heading from 'grommet/components/Heading';
 import Notification from 'grommet/components/Notification';
 import Paragraph from 'grommet/components/Paragraph';
-import SearchInput from 'grommet/components/SearchInput';
+import Button from 'grommet/components/Button';
 import Search from 'grommet/components/Search';
 import Animate from 'grommet/components/Animate';
 import Section from 'grommet/components/Section';
