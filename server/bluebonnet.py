@@ -89,8 +89,10 @@ class State:
         to_return = ''
         to_return += self.gen_coh_graph()
         to_return += self.gen_stack_graph()
-        if(states or len(self.districts) <= 15):
-            to_return += gen_full_pvi_scatter(states)
+        if(states and len(self.districts) <= 15):
+            temp_full, temp_regr = gen_full_pvi_scatter(states)
+            self.regr = temp_regr
+            to_return += temp_full
         else:
             to_return += self.gen_pvi_fundraising_scatter()
 
@@ -98,7 +100,12 @@ class State:
         return to_return
 
 
-    def gen_pvi_fundraising_scatter(self):
+    def gen_pvi_fundraising_scatter(self,states=None):
+        if(states and len(self.districts) <= 15):
+            temp_full, temp_regr = gen_full_pvi_scatter(states)
+            self.regr = temp_regr
+            return temp_full
+
         pvi_list = []
         share_list = []
         num_districts = []
@@ -151,6 +158,8 @@ class State:
         #plt.iplot(fig, filename='basic-scatter',show_link=False,config={'displayModeBar': False})
         return plt.plot(fig, include_plotlyjs=True, output_type='div', config={'displayModeBar': False}, show_link=False)
     def gen_performance_graph(self,out_file=None):
+        if(len(self.districts) <= 15):
+            return "<b>Too few data points for performance graph.</b>"
         if(not out_file):
             out_file = ("%s_%s_performance_viz.html" % (self.name,self.party))
         pvi_list = []
@@ -664,7 +673,7 @@ def gen_full_pvi_scatter(states):
 
     # Plot and embed in ipython notebook!
     #plt.iplot(fig, filename='basic-scatter',show_link=False, config={'displayModeBar': False})
-    return(plt.plot(fig, include_plotlyjs=True, output_type='div', config={'displayModeBar': False}, show_link=False))
+    return(plt.plot(fig, include_plotlyjs=True, output_type='div', config={'displayModeBar': False}, show_link=False)), regr
     #return linear_model.LinearRegression().fit(pvi_list,shaped_share)
 
 

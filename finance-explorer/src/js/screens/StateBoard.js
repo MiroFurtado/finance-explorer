@@ -6,14 +6,14 @@ import Article from 'grommet/components/Article';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
 import Heading from 'grommet/components/Heading';
-import Label from 'grommet/components/Label';
-import Meter from 'grommet/components/Meter';
-import Notification from 'grommet/components/Notification';
-import Value from 'grommet/components/Value';
 import Spinning from 'grommet/components/icons/Spinning';
 import LinkPrevious from 'grommet/components/icons/base/LinkPrevious';
 import Animate from 'grommet/components/Animate';
 import Paragraph from 'grommet/components/Paragraph';
+import Button from 'grommet/components/Button';
+import Scorecard from 'grommet/components/icons/base/Scorecard';
+
+
 
 import List from 'grommet/components/List';
 import ListItem from 'grommet/components/ListItem';
@@ -27,6 +27,11 @@ import { pageLoaded } from './utils';
 import PartyBoard from './PartyBoard';
 import {DemIcon, RepIcon} from './PartyIcon';
 import { nominalTypeHack } from 'prop-types';
+
+import {
+  loadTasks, unloadTasks
+} from '../actions/tasks';
+
 
 
 class StateBoard extends Component {
@@ -57,6 +62,7 @@ class StateBoard extends Component {
 
 
     this.setState({name: params.name.toUpperCase()})
+    this.props.dispatch(loadTasks(params.name.toUpperCase()));
 
     pageLoaded(this.state.name+' Selection');
 
@@ -74,7 +80,42 @@ class StateBoard extends Component {
   }
 
   render() {
-    const { error, task } = this.props;
+    const { task } = this.props;
+    let taskNode;
+    if (!task) {
+      taskNode = (
+        <Box
+        center={true}
+          direction='row'
+          responsive={false}
+          pad={{ between: 'small', horizontal: 'medium', vertical: 'medium' }}
+        >
+          <Spinning /><span>Loading...</span>
+        </Box>
+      );
+    } else {
+      taskNode = (
+        <List selectable={true}>
+        <ListItem justify='between'
+          separator='horizontal'>
+          <span>
+            Beto O'Rourke
+          </span>
+          <span className='secondary'>
+            US Senate
+          </span>
+        </ListItem>
+        <ListItem justify='between'>
+          <span>
+            Ted Cruz
+          </span>
+          <span className='secondary'>
+            US Senate
+          </span>
+        </ListItem>
+        </List>
+      );
+    }
 
 
     const layer = (this.state.demActive || this.state.repActive)
@@ -88,68 +129,7 @@ class StateBoard extends Component {
         <Paragraph size='xlarge'>
           Or select an affiliated campaign!
           </Paragraph>
-    </Box>
-    <List selectable={true}>
-  <ListItem justify='between'
-    separator='horizontal'>
-    <span>
-      Beto O'Rourke
-    </span>
-    <span className='secondary'>
-      US Senate
-    </span>
-  </ListItem>
-  <ListItem justify='between'>
-    <span>
-      Ted Cruz
-    </span>
-    <span className='secondary'>
-      US Senate
-    </span>
-  </ListItem>
-</List></div>;
-
-    let errorNode;
-    let taskNode;
-    if (error) {
-      errorNode = (
-        <Notification
-          status='critical'
-          size='large'
-          state={error.message}
-          message='An unexpected error happened, please try again later'
-        />
-      );
-    } else if (!task) {
-      taskNode = (
-        <Box
-          direction='row'
-          responsive={false}
-          pad={{ between: 'small', horizontal: 'medium', vertical: 'medium' }}
-        >
-          <Spinning /><span>Loading...</span>
-        </Box>
-      );
-    } else {
-      taskNode = (
-        <Box pad='medium'>
-          <Label>Status: {task.status}</Label>
-          <Box
-            direction='row'
-            responsive={false}
-            pad={{ between: 'small' }}
-          >
-            <Value
-              value={task.percentComplete}
-              units='%'
-              align='start'
-              size='small'
-            />
-            <Meter value={task.percentComplete} />
-          </Box>
-        </Box>
-      );
-    }
+    </Box>{taskNode}</div>;
 
     return (
       <Article primary={true} full={true}>
@@ -169,8 +149,13 @@ class StateBoard extends Component {
             {this.state.demActive ?  '→ Dem → Finance Dashboard' : ''}
             {this.state.repActive ?  '→ Rep → Finance Dashboard' : ''}
           </Heading>
+          <Box flex={true}
+    justify='end'
+    direction='row'
+    responsive={false}>
+          <Button href='http://127.0.0.1:8080/api/show' icon={<Scorecard/>} plain={true}/>
+        </Box>
         </Header>
-        
         <Animate enter={{"animation": "fade", "duration": 1000, "delay": 0}}>
         {layer}
       </Animate>

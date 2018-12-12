@@ -1,5 +1,5 @@
 import { SESSION_LOAD, SESSION_LOGIN, SESSION_LOGOUT } from '../actions';
-import { deleteSession, postSession } from '../api/session';
+import { deleteSession, postSession, saveGraph } from '../api/session';
 import { updateHeaders } from '../api/utils';
 
 const localStorage = window.localStorage;
@@ -15,6 +15,13 @@ export function initialize() {
       window.location = '/login';
     }
   };
+}
+
+export function save(url,note) {
+    return dispatch => (
+      saveGraph(url, note)
+      .then((payload) => payload)
+    )
 }
 
 export function login(done) {

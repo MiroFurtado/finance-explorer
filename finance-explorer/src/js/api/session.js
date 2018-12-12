@@ -11,6 +11,17 @@ export function postSession(email, password) {
     .then(parseJSON);
 }
 
+export function saveGraph(url,notes) {
+  const options = {
+    headers: headers(),
+    method: 'POST',
+    body: JSON.stringify({ notes })
+  };
+
+  return fetch(url, options)
+    .then(parseJSON);
+}
+
 export function deleteSession(session) {
   const options = {
     headers: headers(),

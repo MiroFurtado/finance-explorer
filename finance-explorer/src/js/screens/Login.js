@@ -78,7 +78,7 @@ class Login extends Component {
             size='small'
             pad={{ horizontal: 'medium', vertical: 'small' }}
           >
-            <span className='secondary'>&copy; 2018 Miro Furtado</span>
+            <span className='secondary'>&copy; 2018 Miro Furtado - Bluebonnet</span>
           </Footer>
         </Sidebar>
 

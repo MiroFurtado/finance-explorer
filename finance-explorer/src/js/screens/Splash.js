@@ -9,6 +9,7 @@ import Heading from 'grommet/components/Heading';
 import Notification from 'grommet/components/Notification';
 import Paragraph from 'grommet/components/Paragraph';
 import SearchInput from 'grommet/components/SearchInput';
+import Search from 'grommet/components/Search';
 import Animate from 'grommet/components/Animate';
 import Section from 'grommet/components/Section';
 import CurrencyIcon from 'grommet/components/icons/base/Currency';
@@ -22,6 +23,7 @@ class Splash extends Component {
   constructor () {
     super();
     this.state = {
+      initial: true,
       value: ''
     }
     this.handleFormChange = this.handleFormChange.bind(this);
@@ -81,11 +83,11 @@ class Splash extends Component {
           </Animate>
         </Header>     
         {errorNode}
-        <SearchInput
+        <Search
+        size={'medium'} inline={true}
           value={this.state.value}
-          suggestions={this.state.suggestions}
           onDOMChange={this.handleFormChange}
-          placeholder="State"
+          placeHolder={'State to explore'}
         />
         <Box pad='medium'>
           <Heading tag='h3' strong={true}>

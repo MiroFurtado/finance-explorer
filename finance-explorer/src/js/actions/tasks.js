@@ -3,9 +3,9 @@ import {
   watchTasks, unwatchTasks, watchTask, unwatchTask
 } from '../api/tasks';
 
-export function loadTasks() {
+export function loadTasks(stateName) {
   return dispatch => (
-    watchTasks()
+    watchTasks(stateName)
       .on('success',
         payload => dispatch({ type: TASKS_LOAD, payload })
       )

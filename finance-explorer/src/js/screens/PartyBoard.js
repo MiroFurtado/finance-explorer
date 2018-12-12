@@ -1,20 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-
 import Box from 'grommet/components/Box';
 import Paragraph from 'grommet/components/Paragraph';
-
 import Split from 'grommet/components/Split';
-
 import Tiles from 'grommet/components/Tiles';
 import Tile from 'grommet/components/Tile';
 import Header from 'grommet/components/Header';
 import Heading from 'grommet/components/Heading';
+import Sidebar from 'grommet/components/Sidebar';
+
 import GraphDisplay from './GraphDisplay';
 
 import { pageLoaded } from './utils';
-
 
 
 
@@ -25,7 +23,7 @@ class PartyBoard extends Component {
         this.state = {
           demActive: props.dem,
           repActive: props.rep,
-          currentGraph: '',
+          currentGraph: 'coh',
         };
 
     }
@@ -47,24 +45,9 @@ class PartyBoard extends Component {
     pad='medium' margin={{'left': 'large'}}>
     <GraphDisplay graph={this.state.currentGraph} state={this.props.state} dem={this.state.demActive}/> </Box>
     <Box align='right'>
+    <Sidebar>
     <Tiles fill={true}
   selectable={true}>
-  <Tile separator='top'
-    align='start' onClick={this._onClickTile.bind(this, '')}>
-    <Header size='small'
-      pad={{"horizontal": "small"}}>
-      <Heading tag='h4'
-        strong={true}
-        margin='none'>
-        Overall Reports
-      </Heading>
-    </Header>
-    <Box pad='small'>
-      <Paragraph margin='none'>
-        Summarizes party finances for congressional races in Texas
-      </Paragraph>
-    </Box>
-  </Tile>
   <Tile separator='top'
     align='start' onClick={this._onClickTile.bind(this, 'coh')}>>
     <Header size='small'
@@ -77,7 +60,7 @@ class PartyBoard extends Component {
     </Header>
     <Box pad='small'>
       <Paragraph margin='none'>
-        Dollars raised by Democrats by Congressional District in Texas in 2018
+        Dollars raised by Democrats by Congressional District in your state in 2018
       </Paragraph>
     </Box>
   </Tile>
@@ -184,6 +167,7 @@ class PartyBoard extends Component {
     </Box>
   </Tile>
 </Tiles>
+</Sidebar>
     </Box>
   </Split>);
     }
@@ -198,22 +182,6 @@ pad='medium' margin={{'left': 'large'}}>
 <Tiles fill={true}
 selectable={true}>
 <Tile separator='top'
-align='start' onClick={this._onClickTile.bind(this, '')}>
-<Header size='small'
-  pad={{"horizontal": "small"}}>
-  <Heading tag='h4'
-    strong={true}
-    margin='none'>
-    Overall Reports
-  </Heading>
-</Header>
-<Box pad='small'>
-  <Paragraph margin='none'>
-    Summarizes party finances for congressional races in Texas
-  </Paragraph>
-</Box>
-</Tile>
-<Tile separator='top'
 align='start' onClick={this._onClickTile.bind(this, 'coh')}>>
 <Header size='small'
   pad={{"horizontal": "small"}}>
@@ -225,7 +193,7 @@ align='start' onClick={this._onClickTile.bind(this, 'coh')}>>
 </Header>
 <Box pad='small'>
   <Paragraph margin='none'>
-    Dollars raised by Republicans by Congressional District in Texas in 2018
+    Dollars raised by Republicans by Congressional District in your state in 2018
   </Paragraph>
 </Box>
 </Tile>

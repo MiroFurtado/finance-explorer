@@ -5,15 +5,15 @@ if (window.location.protocol === 'https:') {
   protocol = 'wss:';
 }
 const host = ((process.env.NODE_ENV === 'development') ?
-  'localhost:8102' : `${window.location.host}`);
+  'localhost:8080' : `${window.location.host}`);
 const webSocketUrl = `${protocol}//${host}`;
 
 const socketWatcher = new RequestWatcher({ webSocketUrl });
 
 let tasksWatcher;
 
-export function watchTasks() {
-  tasksWatcher = socketWatcher.watch('/api/task');
+export function watchTasks(stateName) {
+  tasksWatcher = socketWatcher.watch('/api/'+stateName+'/cands/');
   return tasksWatcher;
 }
 

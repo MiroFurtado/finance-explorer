@@ -14,7 +14,6 @@ import Paragraph from 'grommet/components/Paragraph';
 import Value from 'grommet/components/Value';
 import Meter from 'grommet/components/Meter';
 import Spinning from 'grommet/components/icons/Spinning';
-import { getMessage } from 'grommet/utils/Intl';
 
 import NavControl from '../components/NavControl';
 import {
