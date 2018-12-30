@@ -8,6 +8,26 @@ h1 {
 	margin-bottom: 36px;
 }
 
+h2 {
+	color: #41c0c9;
+	font-family: 'Quicksand';
+	font-size: 32px;
+	font-weight: 400;
+	line-height: 35px;
+	letter-spacing: -1px;
+	margin-bottom: 15px;
+}
+
+h3 {
+	color: #a6d3d6;
+	font-family: 'Quicksand';
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 28px;
+	letter-spacing: -1px;
+	margin-bottom: 15px;
+}
+
 p {
 	color: #4E3F30;
 	font-family: 'Lato';
